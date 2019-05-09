@@ -1,0 +1,81 @@
+
+// Fonts
+
+//@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.left_menu {
+  padding-right: 5px;
+}
+
+.left_menu_link {
+  color: #fffafa;
+}
+
+.content {
+  flex: 1;
+  padding-left: 0;
+
+}
+
+.button_form {
+  text-align: right;
+  padding-right: 32px;
+}
+
+.breadcrumb {
+  background-color: #F8FAFC;
+}
+
+.table-paginate {
+
+}
+
+/*  FORM start  */
+
+.show-form_label {
+  padding-left: 32px;
+}
+
+/*  FORM end  */
+
+/*  FORM Validate end  */
+.invalid-feedback {
+  display: block;
+}
+/*  FORM Validate end  */
+
+
+/*  TABLE start */
+.table_th_button {
+  width: 1%;
+}
+/*  TABLE end */
+
