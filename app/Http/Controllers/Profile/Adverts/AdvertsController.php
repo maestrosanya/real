@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Profile\Adverts;
 
+use App\Models\Category\CategoryModel;
+use App\Models\Rerions\RegionModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -24,7 +26,13 @@ class AdvertsController extends Controller
      */
     public function create()
     {
-        return view('theme.first.profile.adverts.profile-adverts-create');
+        $categories = RegionModel::where('parent_id', null)->orderBy('name')->get();
+
+        $data = [
+            'categories' => $categories
+        ];
+
+        return view('theme.first.profile.adverts.profile-adverts-create')->with($data);
     }
 
     /**

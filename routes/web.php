@@ -27,6 +27,8 @@ Route::group(['prefix' => 'profile', 'middleware' => ['web', 'verified'], 'as' =
 
     // Profile -> Adverts
     Route::resource('/adverts', 'Profile\Adverts\AdvertsController');
+    // Ajax get Adverts
+    Route::post('/adverts/ajax', 'Profile\Adverts\AjaxAdvertsController@ajaxGetAdverts')->name('adverts.ajax');
 
 });
 
