@@ -110,20 +110,22 @@
                         @endforeach
 
                     @else
-                        @foreach(json_decode($attribute->variants) as $variant_key => $variant)
-                            <div class="form-group form-inline">
+                        @if(!empty(json_decode($attribute->variants)))
+                            @foreach(json_decode($attribute->variants) as $variant_key => $variant)
+                                <div class="form-group form-inline">
 
-                                <input type="text" name="variants_attr[]" value="{{ old('variants_attr.'.$variant_key.'', $variant) }}" class="form-control col-10 {{ $errors->get('variants_attr.'.$variant_key.'') ? 'is-invalid' : '' }}">
-                                <button type="button" class="btn btn-danger btn_delete_input"><i class="fa fa-minus-circle"></i></button>
+                                    <input type="text" name="variants_attr[]" value="{{ old('variants_attr.'.$variant_key.'', $variant) }}" class="form-control col-10 {{ $errors->get('variants_attr.'.$variant_key.'') ? 'is-invalid' : '' }}">
+                                    <button type="button" class="btn btn-danger btn_delete_input"><i class="fa fa-minus-circle"></i></button>
 
-                                @if($errors->has('variants_attr.'.$variant_key))
-                                    <span class="invalid-feedback" >
-                                        {{ $errors->first('variants_attr.'.$variant_key) }}
-                                    </span>
-                                @endif
+                                    @if($errors->has('variants_attr.'.$variant_key))
+                                        <span class="invalid-feedback" >
+                                            {{ $errors->first('variants_attr.'.$variant_key) }}
+                                        </span>
+                                    @endif
 
-                            </div>
-                        @endforeach
+                                </div>
+                            @endforeach
+                        @endif
                     @endif
 
                 </div>

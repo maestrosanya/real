@@ -38,6 +38,19 @@
                     @endif
                 </div>
             </li>
+
+            <li class="form-group row">
+                <span class="col-sm-2 ">Вложенные категории</span>
+                <div class="col-sm-10">
+                    @if($category->childrens)
+                        @foreach($category->childrens as $children)
+                            <a href="{{ route('admin.categories.show', $children->id) }}">{{ $children->name }}</a>
+                        @endforeach
+                    @else
+                        <span>Верхний уровень категорий</span>
+                    @endif
+                </div>
+            </li>
         </ul>
     @endisset
 
@@ -58,27 +71,29 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($category->attributes as $attribute)
-                <tr>
-                    <td scope="row">
-                        <a href="{{ route('admin.categories.attributes.show', [$category, $attribute]) }}">
-                            {{ $attribute->name }}
-                        </a>
-                    </td>
+            @if(!empty($category->attributes))
+                @foreach($category->attributes as $attribute)
+                    <tr>
+                        <td scope="row">
+                            <a href="{{ route('admin.categories.attributes.show', [$category, $attribute]) }}">
+                                {{ $attribute->name }}
+                            </a>
+                        </td>
 
-                    <td>{{ $attribute->type }}</td>
+                        <td>{{ $attribute->type }}</td>
 
-                    <td>{{ $attribute->required ? 'да' : 'нет' }}</td>
+                        <td>{{ $attribute->required ? 'да' : 'нет' }}</td>
 
-                    <td align="center">
-                        <a href="{{ route('admin.categories.attributes.edit', [$category, $attribute]) }}">
-                            <button type="button" class="btn btn-dark">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+                        <td align="center">
+                            <a href="{{ route('admin.categories.attributes.edit', [$category, $attribute]) }}">
+                                <button type="button" class="btn btn-dark">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
     @endif

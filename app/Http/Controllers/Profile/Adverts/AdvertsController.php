@@ -13,7 +13,10 @@ class AdvertsController extends Controller
     public function showCategory($id)
     {
         $category = CategoryModel::findOrFail($id);
-        echo $category->name;
+
+        return view('theme.first.profile.adverts.attributes.profile-adverts-create-attributes', [
+            'category' => $category
+        ]);
     }
 
 

@@ -55,7 +55,9 @@
                     <div class="col-sm-10">
                         <select name="parent" id="parent" class="form-control">
                             <option selected value="{{ $category->parent->id ?? 0 }}">{{ $category->parent->name ?? 'Родительская категория' }}</option>
-                            @foreach($parents as $parent)
+                            <option selected value="0">Родительская категория</option>
+
+                        @foreach($parents as $parent)
                                 <option value="{{ $parent->id }}">
                                     @for($i=0; $i < $parent->depth; $i++) &mdash; @endfor
                                     {{ $parent->name }}

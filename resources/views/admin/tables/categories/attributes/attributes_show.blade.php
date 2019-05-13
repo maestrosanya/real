@@ -58,7 +58,7 @@
             <li class="form-group row">
                 <span class="col-sm-2 ">Сортировка</span>
                 <div class="col-sm-10">
-                    <span>{{ $attribute->order ?? '0'}}</span>
+                    <span>{{ $attribute->sort }}</span>
                 </div>
             </li>
 
@@ -66,11 +66,13 @@
                 <span class="col-sm-2 ">Варианты</span>
 
                 <ul class="form-show col-sm-10">
-                    @foreach(json_decode($attribute->variants) as $variant)
-                        <li class="form-group col-sm-10 row">
-                            <span>{{ $variant }}</span>
-                        </li>
-                    @endforeach
+                    @if(!empty(json_decode($attribute->variants)))
+                        @foreach(json_decode($attribute->variants) as $variant)
+                            <li class="form-group col-sm-10 row">
+                                <span>{{ $variant }}</span>
+                            </li>
+                        @endforeach
+                    @endif
                 </ul>
             </li>
 

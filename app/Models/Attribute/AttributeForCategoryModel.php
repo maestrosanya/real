@@ -13,6 +13,7 @@ class AttributeForCategoryModel extends Model
     const ATTRIBUTE_TYPE_STRING = 'string';
     const ATTRIBUTE_TYPE_INTEGER = 'integer';
     const ATTRIBUTE_TYPE_FLOAT = 'float';
+    const ATTRIBUTE_TYPE_SELECT = 'select';
 
     protected $fillable = [
         'name', 'type', 'required', 'variants', 'sort'
@@ -24,6 +25,7 @@ class AttributeForCategoryModel extends Model
             self::ATTRIBUTE_TYPE_STRING => self::ATTRIBUTE_TYPE_STRING,
             self::ATTRIBUTE_TYPE_INTEGER => self::ATTRIBUTE_TYPE_INTEGER,
             self::ATTRIBUTE_TYPE_FLOAT => self::ATTRIBUTE_TYPE_FLOAT,
+            self::ATTRIBUTE_TYPE_SELECT => self::ATTRIBUTE_TYPE_SELECT,
         ];
     }
 

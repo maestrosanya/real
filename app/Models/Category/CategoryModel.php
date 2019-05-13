@@ -29,6 +29,26 @@ class CategoryModel extends Model
 
     public function attributes()
     {
-        return$this->hasMany(AttributeForCategoryModel::class, 'category_id', 'id');
+        return $this->hasMany(AttributeForCategoryModel::class, 'category_id', 'id');
+    }
+
+    protected function parentsId()
+    {
+        if($this->parent) {
+
+            $arrayAttr = $this->parent->parentsId() . ',' . $this->id;
+
+            return $arrayAttr;
+        } else {
+            return $arrayAttr = $this->id;
+        }
+    }
+
+    public function parentAttributes()
+    {
+        $parentsId = $this->parentsId();
+        $array_parentsId = array_slice(explode(',', $parentsId), 0, -1);
+
+        return AttributeForCategoryModel::whereIn('category_id', $array_parentsId)->get();
     }
 }

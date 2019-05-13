@@ -46,7 +46,7 @@ class AttributeForCategoryController extends Controller
             'type' => ['required','string', Rule::in(AttributeForCategoryModel::getTypes())],
             'sort' => ['required','integer'],
             'required' => ['required','integer', Rule::in( ['0', '1'])],
-            'variants_attr' => ['required','array'],
+            'variants_attr' => ['array'],
             'variants_attr.*' => ['required','string','max:255'],
         ]);
 
@@ -106,7 +106,7 @@ class AttributeForCategoryController extends Controller
             'type' => ['required','string', Rule::in(AttributeForCategoryModel::getTypes())],
             'sort' => ['required','integer'],
             'required' => ['required','integer', Rule::in( ['0', '1'])],
-            'variants_attr' => ['required','array'],
+            'variants_attr' => ['array'],
             'variants_attr.*' => ['required','string','max:255'],
         ]);
 

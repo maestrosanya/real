@@ -73,6 +73,10 @@ class CategoriesController extends Controller
      */
     public function show(CategoryModel $category)
     {
+
+        $var = $category->parentAttributes();
+        dump($var);
+
         return view('admin.tables.categories.categories_show', [
             'category' =>$category
         ]);
