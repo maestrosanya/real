@@ -20,7 +20,7 @@
                 <a href="{{ route('profile.adverts.create') }}">Создать объявление</a>
 
                 <hr>
-                <button class="ajaxAdverts">Получить категории</button>
+
 
                 <hr>
                 <form action="{{ route('profile.adverts.store') }}" method="post">
@@ -41,6 +41,10 @@
                         <button class="region_array_btn_back">Назад к регионам</button>
                     </div>
 
+                    <div class="region_array_btn_box_next form-group" >
+
+                    </div>
+
                 </form>
 
             </div>
@@ -54,7 +58,7 @@
 @section('script')
     <script type="text/javascript">
 
-        var ajaxRegionRequest = function (parent_id) {
+        var ajaxDataRequest = function (parent_id) {
 
             $.ajax({
 
@@ -85,6 +89,8 @@
 
                     if (response.length != 0){
                         $('.region_array_list').html(html);
+                    }else {
+                        window.location = "{{ url('profile/adverts/create/category') }}" + '/' +parent_id;
                     }
 
                 }
@@ -94,36 +100,32 @@
 
         ////////////////////////////////////////////////////
 
-        var ajaxRegion = function () {
+        var ajaxGetParent = function () {
 
             var currentName = [];
             var parent_id;
-            var btn_back_parent_id;
 
             $(document).on('change', 'input[type="radio"][name="region"]:checked', function (event) {
 
                 currentName += $(this).attr('data-title');
                 parent_id = $(this).val();
-                btn_back_parent_id = $(this).attr('data-parent');
 
                 console.log("Текущее имя" + currentName);
-                console.log("Парент ид для кнопки" + btn_back_parent_id);
 
-                ajaxRegionRequest(parent_id);
-
-
+                ajaxDataRequest(parent_id);
 
             });
 
         };
-        ajaxRegion();
+
+        ajaxGetParent();
 
 
         $('.region_array_btn_back').click(function (event) {
 
             event.preventDefault();
 
-            ajaxRegionRequest(null)
+            ajaxDataRequest(null)
 
         });
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Profile\Adverts;
 
 
-use App\Models\Rerions\RegionModel;
+use App\Models\Category\CategoryModel;
 
 class AjaxAdvertsController
 {
@@ -12,7 +12,7 @@ class AjaxAdvertsController
 
         $parent = request()->post('parent_id');
 
-        $result = RegionModel::orderBy('name')->where('parent_id', '=', $parent)->get();
+        $result = CategoryModel::orderBy('name')->where('parent_id', '=', $parent)->get();
 
         return response()->json($result);
     }

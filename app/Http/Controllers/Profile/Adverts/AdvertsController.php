@@ -9,24 +9,23 @@ use App\Http\Controllers\Controller;
 
 class AdvertsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function showCategory($id)
+    {
+        $category = CategoryModel::findOrFail($id);
+        echo $category->name;
+    }
+
+
     public function index()
     {
         return view('theme.first.profile.adverts.profile-adverts');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        $categories = RegionModel::where('parent_id', null)->orderBy('name')->get();
+        $categories = CategoryModel::where('parent_id', null)->orderBy('name')->get();
 
         $data = [
             'categories' => $categories
@@ -35,12 +34,7 @@ class AdvertsController extends Controller
         return view('theme.first.profile.adverts.profile-adverts-create')->with($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
@@ -92,4 +86,5 @@ class AdvertsController extends Controller
     {
         //
     }
+
 }

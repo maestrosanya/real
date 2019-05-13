@@ -107,7 +107,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role === self::USER_ROLE_USER ? true : false ;
     }
 
-    public function isManager()
+    public function isModerator()
     {
         return $this->role === self::USER_ROLE_MODERATOR ? true : false ;
     }

@@ -27,6 +27,17 @@ Route::group(['prefix' => 'profile', 'middleware' => ['web', 'verified'], 'as' =
 
     // Profile -> Adverts
     Route::resource('/adverts', 'Profile\Adverts\AdvertsController');
+
+    // Profile -> Adverts -> Create
+    Route::group(['prefix' => '/adverts/create', 'as' => 'adverts.create.'], function (){
+
+        // Profile -> Adverts -> Create -> Category -> {category_id}
+        Route::get('/category/{category_id}', 'Profile\Adverts\AdvertsController@showCategory')->name('category');
+        // Profile -> Adverts -> Create -> Category -> {category_id} -> region -> {region_id}
+        Route::get('/category/{category_id}/region/{region_id}', 'Profile\Adverts\AdvertsController@showRegion')->name('region');
+
+    });
+
     // Ajax get Adverts
     Route::post('/adverts/ajax', 'Profile\Adverts\AjaxAdvertsController@ajaxGetAdverts')->name('adverts.ajax');
 
