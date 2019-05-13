@@ -58,7 +58,47 @@
         <a href="{{ route('admin.categories.attributes.create', [$category]) }}"><button class="btn btn-success">Добавить атрибут</button></a>
     </div>
 
-    <h3 align="center">Атрибуты</h3>
+    <h3 style="padding-left: 35px">Родительские атрибуты</h3>
+
+    @if( $category->parentAttributes() )
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col" >Имя</th>
+                <th scope="col" >Тип</th>
+                <th scope="col" >Обязательно</th>
+                <th scope="col" class="text-center table_th_button">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if(!empty($category->parentAttributes()))
+                @foreach($category->parentAttributes() as $attribute)
+                    <tr>
+                        <td scope="row">
+                            <a href="{{ route('admin.categories.attributes.show', [$category, $attribute]) }}">
+                                {{ $attribute->name }}
+                            </a>
+                        </td>
+
+                        <td>{{ $attribute->type }}</td>
+
+                        <td>{{ $attribute->required ? 'да' : 'нет' }}</td>
+
+                        <td align="center">
+                            <a href="{{ route('admin.categories.attributes.edit', [$category, $attribute]) }}">
+                                <button type="button" class="btn btn-dark">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
+            </tbody>
+        </table>
+    @endif
+
+    <h3 style="padding-left: 35px">Атрибуты</h3>
 
     @if( $category->attributes )
         <table class="table table-hover">
@@ -74,7 +114,7 @@
             @if(!empty($category->attributes))
                 @foreach($category->attributes as $attribute)
                     <tr>
-                        <td scope="row">
+                        <td scope="row" >
                             <a href="{{ route('admin.categories.attributes.show', [$category, $attribute]) }}">
                                 {{ $attribute->name }}
                             </a>
