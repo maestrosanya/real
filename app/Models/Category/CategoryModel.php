@@ -49,6 +49,17 @@ class CategoryModel extends Model
         $parentsId = $this->parentsId();
         $array_parentsId = array_slice(explode(',', $parentsId), 0, -1);
 
-        return AttributeForCategoryModel::whereIn('category_id', $array_parentsId)->get();
+        return AttributeForCategoryModel::whereIn('category_id', $array_parentsId)->orderBy('sort')->getModels();
+    }
+
+    public function allAttributes()
+    {
+        $allAttribute = array_merge($this->attributes()->getModels(), $this->parentAttributes());
+
+        uasort($allAttribute, function ($a, $b){
+            return ($a['sort'] > $b['sort']);
+        });
+
+        return $allAttribute;
     }
 }

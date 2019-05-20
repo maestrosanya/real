@@ -29,4 +29,24 @@ class AttributeForCategoryModel extends Model
         ];
     }
 
+    public function isString()
+    {
+        return $this->type == self::ATTRIBUTE_TYPE_STRING ? true : false;
+    }
+
+    public function isInteger()
+    {
+        return $this->type == self::ATTRIBUTE_TYPE_INTEGER ? true : false;
+    }
+
+    public function isFloat()
+    {
+        return $this->type == self::ATTRIBUTE_TYPE_FLOAT ? true : false;
+    }
+
+    public function isSelect()
+    {
+        return $this->type == self::ATTRIBUTE_TYPE_SELECT ? true : false;
+    }
+
 }

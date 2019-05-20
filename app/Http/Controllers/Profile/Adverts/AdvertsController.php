@@ -14,6 +14,8 @@ class AdvertsController extends Controller
     {
         $category = CategoryModel::findOrFail($id);
 
+        dump($category->allAttributes());
+
         return view('theme.first.profile.adverts.attributes.profile-adverts-create-attributes', [
             'category' => $category
         ]);

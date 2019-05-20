@@ -110,7 +110,7 @@ class AttributeForCategoryController extends Controller
             'variants_attr.*' => ['required','string','max:255'],
         ]);
 
-        $result = $category->attributes()->findOrFail($attribute->id)->update([
+        $result = $attribute->update([
             'name' => $request->name,
             'type' => $request->type,
             'sort' => $request->sort,

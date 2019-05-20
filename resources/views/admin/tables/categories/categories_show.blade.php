@@ -66,6 +66,7 @@
             <tr>
                 <th scope="col" >Имя</th>
                 <th scope="col" >Тип</th>
+                <th scope="col" >Сортировка</th>
                 <th scope="col" >Обязательно</th>
                 <th scope="col" class="text-center table_th_button">Действие</th>
             </tr>
@@ -81,6 +82,8 @@
                         </td>
 
                         <td>{{ $attribute->type }}</td>
+
+                        <td>{{ $attribute->sort }}</td>
 
                         <td>{{ $attribute->required ? 'да' : 'нет' }}</td>
 
@@ -106,6 +109,7 @@
                 <tr>
                     <th scope="col">Имя</th>
                     <th scope="col">Тип</th>
+                    <th scope="col" >Сортировка</th>
                     <th scope="col">Обязательно</th>
                     <th scope="col" class="text-center table_th_button">Действие</th>
                 </tr>
@@ -121,6 +125,8 @@
                         </td>
 
                         <td>{{ $attribute->type }}</td>
+
+                        <td>{{ $attribute->sort }}</td>
 
                         <td>{{ $attribute->required ? 'да' : 'нет' }}</td>
 
