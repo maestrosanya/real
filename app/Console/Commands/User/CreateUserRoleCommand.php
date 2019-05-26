@@ -49,7 +49,10 @@ class CreateUserRoleCommand extends Command
                 throw new \Exception('User already exists');
             }
 
-            $user->newUser($arg_name, $arg_email, $arg_password, $user::USER_ROLE_ADMIN, $user::STATUS_VERIFY_ACTIVE);
+            $newUser = new User();
+
+
+            $newUser->newUser($arg_name, $arg_email, $arg_password, User::USER_ROLE_ADMIN, User::STATUS_VERIFY_ACTIVE);
 
             $this->info('Admin created');
 

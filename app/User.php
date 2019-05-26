@@ -114,7 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function newUser(string $name, string $email, string $password, string $role = self::USER_ROLE_USER, string $status = self::STATUS_VERIFY_WAIT)
     {
-        $user = new User;
+        $user = new User();
 
         $user->name = $name;
         $user->email = $email;
@@ -123,7 +123,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $user->role = $role;
         $user->status = $status;
 
-        $user->save();
+        return $user->save();
 
     }
 
