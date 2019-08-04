@@ -115,7 +115,10 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ mix('/js/admin/app.js') }}" defer></script>
+<script src="{{ mix('/js/admin/app.js') }}" ></script>
+
+@yield('scripts')
+
 
 </body>
 </html>

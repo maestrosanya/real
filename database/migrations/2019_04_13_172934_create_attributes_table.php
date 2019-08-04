@@ -20,7 +20,7 @@ class CreateAttributesTable extends Migration
             $table->string('type');
             $table->boolean('required');
             $table->integer('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->json('variants');
+            $table->json('variants')->nullable();
             $table->integer('sort');
 
         });

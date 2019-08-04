@@ -166,6 +166,13 @@ return [
          * Package Service Providers...
          */
 
+
+        /*
+         * Custom Service Providers...
+         */
+
+        App\Providers\ValidateServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

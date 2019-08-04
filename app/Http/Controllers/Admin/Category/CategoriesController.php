@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     public function index()
     {
        // $categories = CategoryModel::where('parent_id', null)->get();
-        $categories = CategoryModel::defaultOrder()->withDepth()->get();
+        $categories = CategoryModel::defaultOrder()->withDepth()->orderBy('id')->get();
 
 
 
@@ -35,7 +35,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $parents = CategoryModel::defaultOrder()->withDepth()->get();
+        $parents = CategoryModel::orderBy('name')->withDepth()->get();
 
         return view('admin.tables.categories.categories_create', [
             'parents' => $parents

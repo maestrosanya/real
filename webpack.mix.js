@@ -20,4 +20,4 @@ mix.js('resources/admin/js/app.js', 'public/js/admin')
     .sass('resources/admin/sass/app.scss', 'public/css/admin')
     .version();
 
-mix.browserSync('real:81');
+//mix.browserSync('localhost');

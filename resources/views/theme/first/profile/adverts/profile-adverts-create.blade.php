@@ -25,6 +25,8 @@
                 <hr>
                 <form action="{{ route('profile.adverts.store') }}" method="post">
 
+                    @csrf
+
                     <div class="region_array form-group" style="overflow: auto; height: 400px">
                         <ul class="list-group region_array_list">
                             @foreach($categories as $category )

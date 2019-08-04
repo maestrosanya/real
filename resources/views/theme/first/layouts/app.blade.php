@@ -86,7 +86,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/frontend/app.js') }}"></script>
+    <script src="{{ mix('/js/frontend/app.js') }}"></script>
 
     @yield('script')
 </body>

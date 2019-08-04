@@ -55,7 +55,7 @@ class RegionsController extends Controller
     {
         $dataValid = $this->validate($request, [
             'name' => ['required','string','max:255'],
-            'slug' => ['required','string','max:255','unique:regions,slug'],
+            'slug' => ['required','string','max:255','alpha_dash', 'unique:regions,slug'],
             'parent_id' => ['required','integer'],
         ]);
 
@@ -115,7 +115,7 @@ class RegionsController extends Controller
     {
         $dataValid = $this->validate($request, [
             'name' => ['required','string','max:255'],
-            'slug' => ['required','string','max:255','unique:regions,slug'],
+            'slug' => ['required','string','max:255','slug', 'unique:regions,slug'],
             'parent_id' => ['required','integer', Rule::unique('regions')->ignore($region->id)],
         ]);
 

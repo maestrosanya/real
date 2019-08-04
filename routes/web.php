@@ -33,8 +33,13 @@ Route::group(['prefix' => 'profile', 'middleware' => ['web', 'verified'], 'as' =
 
         // Profile -> Adverts -> Create -> Category -> {category_id}
         Route::get('/category/{category_id}', 'Profile\Adverts\AdvertsController@showCategory')->name('category');
-        // Profile -> Adverts -> Create -> Category -> {category_id} -> region -> {region_id}
-        Route::get('/category/{category_id}/region/{region_id}', 'Profile\Adverts\AdvertsController@showRegion')->name('region');
+        //    /profile/adverts/create/advert/region/
+        Route::post('/advert/region', 'Profile\Adverts\AdvertsController@ajaxRegion')->name('ajax.region');
+        //    /profile/adverts/create/advert/city/
+        Route::post('/advert/city', 'Profile\Adverts\AdvertsController@ajaxCity')->name('ajax.city');
+
+        // Profile -> Adverts -> Create -> Category -> {category_id} -> store
+        Route::post('/category/{category}/store', 'Profile\Adverts\AdvertsController@store')->name('store');
 
     });
 

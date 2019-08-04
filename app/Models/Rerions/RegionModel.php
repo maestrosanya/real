@@ -8,9 +8,9 @@ class RegionModel extends Model
 {
     protected $table = 'regions';
 
-    /*protected $fillable = [
+    protected $fillable = [
         'name', 'slug', 'parent_id'
-    ];*/
+    ];
 
     public function parent()
     {
