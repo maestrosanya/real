@@ -1,19 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Profile\Adverts;
+namespace App\Http\Controllers\Adverts;
 
 use App\Exceptions\AdvertExeption;
 use App\Http\Requests\AdvertFormRequest;
 use App\Models\Advert\Advert;
 use App\Models\Category\CategoryModel;
 use App\Models\Rerions\RegionModel;
-use App\useCases\Advert\AdvertService;
+use App\useCases\Adverts\AdvertService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class AdvertsController extends Controller
 {
+    protected $advertService;
+
+    public function __construct(AdvertService $advertService)
+    {
+        $this->advertService = $advertService;
+    }
 
     public function ajaxRegion()
     {
@@ -67,15 +73,18 @@ class AdvertsController extends Controller
     {
         try{
 
-            $advert = new Advert(new AdvertService());
+           // dd($advertFormRequest->attribute);
 
             $user_id = Auth::id();
 
-            $result = $advert->advertService->create($advertFormRequest, $user_id, $category);
+            $result = $this->advertService->createAdvert($advertFormRequest, $user_id, $category);
 
             dump($advertFormRequest->all());
 
-        } catch (AdvertExeption $e){
+        } catch (\DomainException $e){
+
+            dd($e->getMessage());
+
             return back()->with('error', $e->getMessage());
         }
     }
