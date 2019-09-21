@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Adverts;
+namespace App\Http\Controllers\Profile\Adverts;
 
 use App\Exceptions\AdvertExeption;
 use App\Http\Requests\AdvertFormRequest;
@@ -25,7 +25,7 @@ class AdvertsController extends Controller
     {
         $regionName = request()->post('region_name');
 
-        $regionsList = RegionModel::orderBy('name')->where('name', 'LIKE', "{$regionName}%")->where('parent_id', null)->limit(10)->get();
+        $regionsList = RegionModel::orderBy('name')->where('name', 'LIKE', "{$regionName}%")->limit(10)->get();
 
         return response()->json($regionsList);
     }

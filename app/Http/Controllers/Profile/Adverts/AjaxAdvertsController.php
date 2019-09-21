@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Adverts;
+namespace App\Http\Controllers\Profile\Adverts;
 
 
 use App\Models\Category\CategoryModel;

@@ -1,6 +1,10 @@
 @extends('theme.first.layouts.app')
 
 @section('content')
+
+
+    <adverts-search-component :categories="{{ $categories }}" :regions="{{ $regions }}"></adverts-search-component>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

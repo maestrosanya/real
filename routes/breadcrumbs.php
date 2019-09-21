@@ -2,7 +2,8 @@
 
 use App\Models\Attribute\AttributeForCategoryModel;
 use App\Models\Category\CategoryModel;
-use App\Models\Rerions\RegionModel;
+use App\Models\Regions\CityModel;
+use App\Models\Regions\RegionModel;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 
@@ -45,7 +46,7 @@ Breadcrumbs::for('admin.regions.index', function ($trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Регионы', route('admin.regions.index'));
 });
-// Главная / Регионы / Просмот дочерних регионов
+// Главная / Регионы / Просмот дочерних регионов (Городов)
 Breadcrumbs::for('admin.regions.show', function ($trail, $region) {
 
     if ($parent = $region->parent) {
@@ -66,6 +67,37 @@ Breadcrumbs::for('admin.regions.edit', function ($trail, RegionModel $region) {
     $trail->parent('admin.regions.index');
     $trail->push('Редактировать регион - ' . $region->name);
 });
+
+//////// Города
+
+// Главная / Города
+Breadcrumbs::for('admin.cities.index', function ($trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('Города', route('admin.cities.index'));
+});
+// Главная / Города / Конкретный город
+Breadcrumbs::for('admin.cities.show', function ($trail, CityModel $city) {
+
+    if ($parent_region = $city->region) {
+        $trail->parent('admin.regions.show', $parent_region);
+       // $trail->push($parent_region->name, route('admin.regions.show', $parent_region));
+    } else {
+        $trail->parent('admin.cities.index');
+    }
+
+    $trail->push($city->name, route('admin.regions.show', $city));
+});
+// Главная / Города / Добавить город
+Breadcrumbs::for('admin.cities.create', function ($trail) {
+    $trail->parent('admin.cities.index');
+    $trail->push('Добавить город');
+});
+// Главная / Города / Редактировать город
+Breadcrumbs::for('admin.cities.edit', function ($trail, CityModel $city) {
+    $trail->parent('admin.cities.index');
+    $trail->push('Редактировать регион - ' . $city->name);
+});
+
 
 /*
  * Категории

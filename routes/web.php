@@ -19,6 +19,15 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
 
+// ADVERTS
+Route::group(['prefix' => 'adverts', 'middleware' => ['web'] ], function () {
+
+  //  Route::post('/', 'Adverts\AdvertsController@requestDataHandler')->name('adverts_handler');
+
+    Route::match(['get', 'post'], '/{regionSlug}/{category?}', 'Adverts\AdvertsController@index')->name('adverts');
+
+});
+
 // User Profile
 Route::group(['prefix' => 'profile', 'middleware' => ['web', 'verified'], 'as' => 'profile.' ], function () {
 
@@ -55,8 +64,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'verified', 'can:admi
 
     // Users
     Route::resource('/users', 'User\UserController');
+
     // Regions
     Route::resource('/regions', 'Regions\RegionsController');
+    // Cities
+    Route::resource('/cities', 'Regions\CitiesController');
+
     // Categories
     Route::resource('/categories', 'Category\CategoriesController');
 

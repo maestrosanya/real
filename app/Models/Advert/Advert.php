@@ -4,6 +4,7 @@
 namespace App\Models\Advert;
 
 
+use App\Models\Regions\RegionModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Advert extends Model
@@ -15,6 +16,13 @@ class Advert extends Model
     const STATUS_PUBLISHED = 'published';
     const STATUS_REJECTED = 'rejected';
     const STATUS_CLOSED = 'closed';
+
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'published_at' => 'datetime',
+        'expires_at' => 'datetime',
+    ];
 
 
     public function isDraft()
@@ -40,6 +48,16 @@ class Advert extends Model
     public function isClosed()
     {
         return $this->status == self::STATUS_CLOSED ? true : false;
+    }
+
+    public function region()
+    {
+        return $this->belongsTo(RegionModel::class);
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(AdvertAttributeValue::class);
     }
 
 

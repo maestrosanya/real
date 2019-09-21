@@ -117,8 +117,8 @@
 <!-- Scripts -->
 <script src="{{ mix('/js/admin/app.js') }}" ></script>
 
-@yield('scripts')
 
+@yield('scripts')
 
 </body>
 </html>

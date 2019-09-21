@@ -75,6 +75,7 @@
             </div>
         </header>
 
+
         <div class="container">
             @yield('breadcrumbs')
         </div>

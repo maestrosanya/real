@@ -20,10 +20,9 @@ class CreateRegionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
-            $table->integer('parent_id')->nullable()->references('id')->on('regions')->onDelete('cascade');
             $table->timestamps();
 
-            $table->index(['id', 'parent_id']);
+            $table->index(['id', 'slug']);
             $table->unique('slug');
 
 

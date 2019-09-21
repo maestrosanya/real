@@ -18,9 +18,9 @@ class RegionModel extends Model
         return $this->hasMany(Advert::class);
     }
 
-    public function parent()
+    public function cities()
     {
-        return $this->belongsTo(self::class, 'parent_id', 'id');
+        return $this->hasMany(CityModel::class, 'parent_id');
     }
 
     public function getAllParentsId()
@@ -45,10 +45,6 @@ class RegionModel extends Model
 
     }
 
-    public function children()
-    {
-        return $this->hasMany(self::class, 'parent_id', 'id');
-    }
 
     public static function getCountry()
     {

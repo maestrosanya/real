@@ -24,7 +24,7 @@
                 </div>
                 <hr />
 
-                <form id="createAdvertForm" v-on:submit.prevent="send" action="{{ route('profile.adverts.create.store', ['category' => $category] ) }}" method="POST">
+                <form id="createAdvertForm" action="{{ route('profile.adverts.create.store', ['category' => $category] ) }}" method="POST">
 
                     @csrf
                     @method('POST')
@@ -114,40 +114,12 @@
 
                     <h3>Контактная информация</h3>
 
-                    <div id="region_container">
-                        <div class="form-group row">
-                            <label for="region" class="col-sm-4 col-form-label">Регион</label>
-                            <div id="region_autocomplite" class="col-sm-8 region-autocomplite">
-                                <input autocomplete="off" v-model="region_name" type="text"  name="region" id="region" value="{{ old('region') }}" class="form-control {{ $errors->has('region') ? 'is-invalid' : '' }}" placeholder="Введите название региона">
-
-                                <ul class="list-group region-autocomplite__list" style="position: absolute">
-                                    <li v-for="regionVariant in regionVariants" v-on:click="selectInputRegion" v-bind:region_id="regionVariant.id" class="list-group-item itemRegion">
-                                        @{{ regionVariant.name }}
-                                    </li>
-                                </ul>
-
-                            </div>
 
 
-                            {{-- Town --}}
-
-                            <template v-if="show_select_city">
-                                <label for="city" class="col-sm-4 col-form-label">Город</label>
-                                <select v-model="city_name" @change="changeCity" type="text"  name="city" id="city" value="{{ old('city') }}" class="col-sm-8 form-control {{ $errors->has('city') ? 'is-invalid' : '' }}">
-                                    <option value="">----</option>
-                                    <option v-for="cityVariant in cityVariants"  class="list-group-item itemCity">
-                                        @{{ cityVariant.name }}
-                                    </option>
-                                </select>
-                            </template>
-                        </div>
+                    <example-component></example-component>
+                    <select-region :errors="{{ $errors }}"></select-region>
 
 
-                        <div v-if="addressShow" id="address_container" class="form-group row">
-                            <label for="" class="col-sm-4 col-form-label">Адрес</label>
-                            <input v-on:keyup.enter="input_getAddress"  type="text" name="address" id="region_value" class="form-control col-sm-8" value="">
-                        </div>
-                    </div>
 
 
 
@@ -171,152 +143,4 @@
 @endsection
 
 
-@section('script')
 
-    <script type="text/javascript">
-
-        var nameRegionGlobal = '';
-
-        $('#createAdvertForm').submit(function (e) {
-            e.preventDefault();
-        });
-
-        var region = new Vue({
-            el: '#region_container',
-            data: {
-                region_name: '',
-                region_id: '',
-                regionVariants: [],
-                city_name: '',
-                city_id: '',
-                cityVariants: [],
-
-                addressShow: false,
-
-                show_select_city: false,
-                selectedRegion: false
-            },
-            watch: {
-                region_name: function (val) {
-
-                    if (this.selectedRegion) {
-                        this.selectedRegion = false;
-                        return
-                    }
-
-                    if (val.length >= 2) {
-                        axios.post('/profile/adverts/create/advert/region/', {
-                            region_name: val
-                        })
-                            .then((response) => {
-                                console.log(response.data);
-                                this.regionVariants = response.data; // Сохраняем ответ с Регионами
-
-                                this.show_select_city = false; // При измменении Региона скрываем поле выбора города
-
-                                this.addressShow = false;
-
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                    } else {
-                        this.regionVariants = [];
-                    }
-                },
-                city_name: function (val) {
-                    val ? this.addressShow = true : this.addressShow = false; // Если поле выбора горада окажется пустым, тогда скрываем поле ввода адреса
-                }
-            },
-            methods: {
-                selectInputRegion: function (event) {
-
-                    region.regionVariants = [];
-                    region.region_name = event.toElement.innerText;
-                    region.region_id = event.toElement.attributes.region_id.value;
-
-                    this.selectedRegion = true;
-                    this.show_select_city = true;
-
-                    console.log(this.show_select_city);
-
-
-                    axios.post('/profile/adverts/create/advert/city/', {
-                        region_id: region.region_id
-                    })
-                        .then(function (response) {
-                            console.log(response.data);
-
-                            region.cityVariants = response.data;
-
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                },
-                changeCity: function () {
-
-                    this.addressShow = true;
-
-                }
-
-            }
-        });
-
-        /*var mapContainer = $('#map');
-
-        var addressMap = new Vue({
-            el: '#address_container',
-            data: {
-                address: '',
-                fullAddress: '',
-                mapContainer: ''
-            },
-            methods: {
-                getAddress: function (event) {
-
-
-                    console.log(region.city_name);
-
-                    if (region.city_name) {
-                        this.fullAddress = region.region_name + ', ' + this.address;
-
-                        console.log(this.fullAddress);
-                        viewMapRegion(this.fullAddress);
-                    }
-                    return '';
-
-
-                },
-                input_getAddress: function (event) {
-
-                    if (region.city_name) {
-                        this.fullAddress = region.region_name + ', ' + region.city_name + ', ' + this.address;
-
-                        console.log(this.fullAddress);
-                        viewMapRegion(this.fullAddress);
-                    }
-                    return '';
-
-                },
-            }
-        });*/
-
-
-       /* var createAdvertForm = new Vue({
-            el: '#city_container',
-            methods: {
-                send: function (event) {
-                    console.log(addressMap.address);
-                    //viewMapRegion(addressMap.address);
-                }
-            }
-
-        });*/
-
-
-
-    </script>
-
-
-@endsection

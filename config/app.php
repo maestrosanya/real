@@ -172,6 +172,7 @@ return [
          */
 
         App\Providers\ValidateServiceProvider::class,
+        App\Providers\ElasticSearchProvider::class,
 
         /*
          * Application Service Providers...

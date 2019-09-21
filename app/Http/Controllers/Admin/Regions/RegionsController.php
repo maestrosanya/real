@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Regions;
 
-use App\Models\Rerions\RegionModel;
+use App\Models\Regions\RegionModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -14,9 +14,31 @@ class RegionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $regions = RegionModel::where('parent_id', null)->paginate(15);
+
+        $regions = [];
+
+        $query = RegionModel::orderByDesc('id');
+
+        if ( !empty($name = $request->get('filter_name')) ) {
+            $query->where('name', 'like' , '%' . $name . '%');
+        }
+        if ( !empty($slug = $request->get('filter_slug')) ) {
+            $query->where('slug', 'like' , '%' . $slug . '%');
+        }
+
+        if ( $name || $slug ) {
+            $regions = $query->paginate(15);
+        }else {
+            $regions = RegionModel::orderBy('name')->paginate(15);
+        }
+
+       // dd($query);
+
+
+
+
 
         $data = [
             'regions' => $regions,
@@ -79,7 +101,9 @@ class RegionsController extends Controller
     {
         $region = RegionModel::find($region->id);
 
-        $sub_regions = $region->children;
+       // dd($region);
+
+        $sub_regions = $region->cities;
 
         $data = [
             'region' => $region,
@@ -97,11 +121,7 @@ class RegionsController extends Controller
      */
     public function edit(RegionModel $region)
     {
-        $data = [
-            'region' => $region
-        ];
-
-        return view('admin.tables.regions.regions_edit')->with($data);
+        return view('admin.tables.regions.regions_edit')->with(['region' => $region]);
     }
 
     /**

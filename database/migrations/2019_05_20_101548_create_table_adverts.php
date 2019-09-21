@@ -19,18 +19,18 @@ class CreateTableAdverts extends Migration
             $table->string('title', 255);
             $table->text('content');
             $table->integer('price');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('address')->nullable();
             $table->text('reason_rejection')->nullable();
 
             //
 
             $table->integer('category_id')->unsigned()->references('id')->on('categories');
-            $table->integer('region_id')->unsigned()->references('id')->on('regions');
+            $table->integer('city_id')->unsigned()->references('id')->on('cities');
             $table->integer('user_id')->unsigned()->references('id')->on('users')->onDelete('cascade');
 
 
-            $table->index(['category_id', 'region_id', 'user_id']);
+            $table->index(['category_id', 'city_id', 'user_id']);
 
 
             // Statuses

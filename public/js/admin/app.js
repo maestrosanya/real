@@ -49209,12 +49209,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-/*const app = new Vue({
-    el: '#app'
-});*/
-
-__webpack_require__(/*! ./components/add_new_input */ "./resources/admin/js/components/add_new_input.js");
+//const app = new Vue({
+//    el: '#app'
+//});
+//require('./components/add_new_input');
 
 /***/ }),
 
@@ -49343,36 +49341,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_103f025e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/admin/js/components/add_new_input.js":
-/*!********************************************************!*\
-  !*** ./resources/admin/js/components/add_new_input.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// Created new input Bootstrap-4
-function addNewInput(className, buttonName) {
-  $('#' + buttonName).click(function (e) {
-    e.preventDefault();
-    var html = '<div class="form-group form-inline">' + '<input type="text" name="' + className + '[]" value="" placeholder="new variant" class="form-control col-10">' + '<button type="button" class="btn btn-danger btn_delete_input"><i class="fa fa-minus-circle"></i></button>' + '</div>';
-    $('#' + className).append(html);
-  });
-}
-
-function deleteInput() {
-  $('html').on('click', '.btn_delete_input', function (e) {
-    e.preventDefault();
-    $(this).parent('.form-group .form-inline').remove();
-  });
-} // Start function
-
-
-addNewInput('variants_attr', 'btn_variants_attr'); // Start function
-
-deleteInput();
 
 /***/ }),
 

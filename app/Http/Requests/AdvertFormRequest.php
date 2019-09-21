@@ -72,7 +72,9 @@ class AdvertFormRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string', 'max:1000'],
             'price' => ['required', 'integer', 'max:999999999'],
-            'address' => ['required', 'string', 'max:255'],
+            'address' => ['string', 'max:255'],
+            'region' => ['required', 'string', 'max:255'],
+            'city_id' => ['required', 'integer'],
             'phone' => ['required', 'phone_number'],
         ];
 

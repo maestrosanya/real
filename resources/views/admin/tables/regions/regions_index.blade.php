@@ -10,6 +10,24 @@
 
 @section('content')
 
+    <form action="?" method="GET" class="col">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Фильтр</button>
+        </div>
+        <div class="form-row py-4">
+            <div class="col">
+                <label for="filter_name" class="col">Имя</label>
+                <input id="filter_name" name="filter_name" type="text" class="form-control">
+            </div>
+
+            <div class="col">
+                <label for="filter_slug" class="col">Slug</label>
+                <input id="filter_slug" name="filter_slug" type="text" class="form-control">
+            </div>
+
+        </div>
+    </form>
+
     @isset( $regions )
         <table class="table table-hover">
             <thead class="thead-light">

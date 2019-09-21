@@ -1,34 +1,61 @@
 <?php
 
 
-namespace App\useCases\Advert;
+namespace App\useCases\Adverts;
 
 
+use App\Http\Requests\AdvertFormRequest;
 use App\Models\Advert\Advert;
+use App\Models\Advert\AdvertAttribute;
 use App\Models\Category\CategoryModel;
 use App\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 
 class AdvertService
 {
-    public function create(FormRequest $request, $userID, $categoryId)
+    public function createAdvert(AdvertFormRequest $request, $userID, $categoryId)
     {
-        $user = User::findOrFail($userID);
-
-        $category = CategoryModel::findOrFail($categoryId);
 
 
-        DB::transaction(function () use ($request, $user, $category){
 
-            $advert = new Advert();
+        return DB::transaction(function () use ($request, $userID, $categoryId){
 
-            $advert->title = $request['title'];
-            $advert->content = $request['content'];
-            $advert->price = $request['price'];
-            $advert->address = $request['address'];
-            $advert->phone = $request['phone'];
-            $advert->status = $request['status'];
+            $advert = Advert::make([
+                'title' => $request['title'],
+                'content' => $request['content'],
+                'price' => $request['price'],
+                'region_id' => $request['city_id'],
+                'address' => $request['address'],
+                'phone' => $request['phone'],
+                'status' => Advert::STATUS_DRAFT,
+
+                'category_id' => $categoryId->id,
+                'user_id' => $userID
+
+            ]);
+
+            $advert->saveOrFail();
+
+
+            if ($request->attribute) {
+                foreach ($request->attribute as $key => $value) {
+
+                    if ($value !== null) {
+                        AdvertAttribute::create([
+                            'advert_id' => $advert->id,
+                            'attribute_id' => $key,
+                            'value' => $value,
+                        ]);
+                    }
+
+
+                }
+            }
+
+
+
+
+            return $advert;
 
         });
     }
